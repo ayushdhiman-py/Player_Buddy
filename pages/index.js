@@ -4,7 +4,7 @@ import Search from "@/components/Home/Search";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
 import app from "@/shared/FirebaseConfig";
 import { useEffect, useState } from "react";
-import Data from "@/shared/Data";
+import Data from "@/shared/Data"; // Import Data object
 import Posts from "@/components/Home/Posts";
 
 export default function Index() {
@@ -12,7 +12,7 @@ export default function Index() {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // State to track loading status
 
   useEffect(() => {
     getPosts();
@@ -21,16 +21,17 @@ export default function Index() {
   const getPosts = async () => {
     try {
       const snapshot = await getDocs(collection(db, "posts"));
-      const currentDate = new Date();
+      const currentDate = new Date(); // Get the current date
       const postsData = snapshot.docs
         .map((doc) => doc.data())
         .filter((post) => {
           const postDate = new Date(post.date);
+          // Return true if the post date is after or equal to the current date
           return postDate >= currentDate;
         });
       setPosts(postsData);
-      setFilteredPosts(postsData);
-      setLoading(false);
+      setFilteredPosts(postsData); // Initially show all posts
+      setLoading(false); // Set loading to false once posts are fetched
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
@@ -49,27 +50,29 @@ export default function Index() {
       });
       setFilteredPosts(filtered);
     } else {
-      setFilteredPosts(posts);
+      setFilteredPosts(posts); // If search text is empty, show all posts
     }
   };
 
   const handleGameClick = (gameName) => {
     setSelectedGame(gameName);
-    const lowercaseGameName = gameName.toLowerCase();
+    const lowercaseGameName = gameName.toLowerCase(); // Convert game name to lowercase for case-insensitive comparison
     if (lowercaseGameName === "all") {
-      setFilteredPosts(posts);
+      setFilteredPosts(posts); // If "ALL" is clicked, show all posts
     } else if (lowercaseGameName === "other games") {
+      // Show posts that do not match any category
       const filtered = posts.filter((post) => {
-        const lowercaseTitle = post.title.toLowerCase();
+        const lowercaseTitle = post.title.toLowerCase(); // Convert post title to lowercase
         return !Data.GameList.some(
           (game) => game.name.toLowerCase() === lowercaseTitle
-        );
+        ); // Check if post title matches any game name
       });
       setFilteredPosts(filtered);
     } else {
+      // Show posts that match the selected game
       const filtered = posts.filter((post) => {
-        const lowercaseTitle = post.title.toLowerCase();
-        return lowercaseTitle.includes(lowercaseGameName);
+        const lowercaseTitle = post.title.toLowerCase(); // Convert post title to lowercase
+        return lowercaseTitle.includes(lowercaseGameName); // Check if post title contains the selected game name
       });
       setFilteredPosts(filtered);
     }

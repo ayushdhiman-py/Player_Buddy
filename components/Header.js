@@ -37,22 +37,18 @@ export default function Header() {
         />
       </Head>
       <Link href="/">
-        {" "}
-        {/* Wrap the h1 text with Link component */}
-        <a className="hover:cursor-pointer">
-          <h1
-            style={{
-              fontFamily: "Roboto, sans-serif",
-              fontWeight: "bold",
-              fontSize: "25px",
-              color: "#1E3A8A",
-            }}
-          >
-            Player-Buddy
-          </h1>
-        </a>
+        <h1
+          className="hover:cursor-pointer"
+          style={{
+            fontFamily: "Roboto, sans-serif",
+            fontWeight: "bold",
+            fontSize: "25px",
+            color: "#1E3A8A",
+          }}
+        >
+          Player-Buddy
+        </h1>
       </Link>
-
       <div className="flex gap-2 items-center justify-end flex-1">
         {session ? (
           <div className="flex items-center gap-4">
