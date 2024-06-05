@@ -1,5 +1,10 @@
 const GameList = [
   {
+    id: 0,
+    name: "ALL",
+    image: "../Images/CricketBall.png",
+  },
+  {
     id: 1,
     name: "Cricket",
     image: "../Images/CricketBall.png",
@@ -16,7 +21,7 @@ const GameList = [
   },
   {
     id: 4,
-    name: "Soccer",
+    name: "Football",
     image: "../Images/SoccerBall.png",
   },
   {

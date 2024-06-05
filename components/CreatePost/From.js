@@ -16,6 +16,8 @@ function Form() {
   const { data: session } = useSession();
   const db = getFirestore(app);
   const storage = getStorage(app);
+  const [selectedGame, setSelectedGame] = useState(null);
+
   useEffect(() => {
     if (session) {
       setInputs((values) => ({ ...values, userName: session.user?.name }));
@@ -25,10 +27,11 @@ function Form() {
   }, [session]);
 
   useEffect(() => {
-    if (submit == true) {
+    if (submit) {
       savePost();
     }
   }, [submit]);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -68,6 +71,9 @@ function Form() {
     await setDoc(doc(db, "posts", Date.now().toString()), inputs);
   };
 
+  const handleGameClick = (gameName) => {
+    setSelectedGame(gameName);
+  };
   return (
     <div className="mt-4">
       {showToast ? (
@@ -125,14 +131,16 @@ function Form() {
           onChange={handleChange}
           required
           className="w-full mb-4 border-[1px] p-2 rounded-md text-black"
+          defaultValue="ALL" // Set default value to "ALL"
         >
-          <option disabled defaultValue>
-            Select Game
-          </option>
+          <option value="ALL">Select Game</option> {/* Placeholder option */}
           {Data.GameList.map((item) => (
-            <option key={item.id}>{item.name}</option>
+            <option key={item.id} value={item.name}>
+              {item.name}
+            </option>
           ))}
         </select>
+
         <input
           type="file"
           onChange={(e) => setFile(e.target.files[0])}

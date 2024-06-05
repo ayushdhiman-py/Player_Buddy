@@ -5,10 +5,10 @@ import { HiOutlineXCircle } from "react-icons/hi";
 function PostModal({ post }) {
   return (
     <div>
-      <dialog id="my_modal_1" className="modal p-0 rounded-lg">
+      <dialog id="my_modal_1" className="modal p-0 rounded-lg h-100 w-96 bg-opacity-10">
         <form method="dialog" className="modal-box">
           <button className="absolute right-2 top-2">
-            <HiOutlineXCircle className="text-[22px] text-black" />
+            <HiOutlineXCircle className="text-[30px] text-black" />
           </button>
           <PostItem post={post} />
         </form>
