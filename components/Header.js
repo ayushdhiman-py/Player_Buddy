@@ -36,6 +36,7 @@ export default function Header() {
         />
       </Head>
       <h1
+        className="hover:cursor-pointer"
         style={{
           fontFamily: "Roboto, sans-serif",
           fontWeight: "bold",
