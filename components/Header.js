@@ -42,6 +42,9 @@ export default function Header() {
           fontSize: "25px",
           color: "#1E3A8A",
         }}
+        onClick={() => {
+          router.push("/");
+        }}
       >
         Player-Buddy
       </h1>
