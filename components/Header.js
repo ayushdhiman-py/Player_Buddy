@@ -6,6 +6,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import Link from "next/link"; // Import Link from Next.js
 
 export default function Header() {
   const router = useRouter();
@@ -35,20 +36,22 @@ export default function Header() {
           rel="stylesheet"
         />
       </Head>
-      <h1
-        className="hover:cursor-pointer"
-        style={{
-          fontFamily: "Roboto, sans-serif",
-          fontWeight: "bold",
-          fontSize: "25px",
-          color: "#1E3A8A",
-        }}
-        onClick={() => {
-          router.push("/");
-        }}
-      >
-        Player-Buddy
-      </h1>
+      <Link href="/">
+        {" "}
+        {/* Wrap the h1 text with Link component */}
+        <a className="hover:cursor-pointer">
+          <h1
+            style={{
+              fontFamily: "Roboto, sans-serif",
+              fontWeight: "bold",
+              fontSize: "25px",
+              color: "#1E3A8A",
+            }}
+          >
+            Player-Buddy
+          </h1>
+        </a>
+      </Link>
 
       <div className="flex gap-2 items-center justify-end flex-1">
         {session ? (
