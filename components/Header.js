@@ -18,7 +18,7 @@ export default function Header() {
         className="hover:cursor-pointer rounded-full bg-black"
         onClick={() => router.push("/")}
       />
-      <h1 className="font-monotic text-extrabold ml-[10%] text-[25px] text-blue-700">Player-Buddy</h1>
+      <h1 className="font-monotic text-extrabold text-[25px] text-blue-700">Player-Buddy</h1>
       <div className="flex gap-4 items-center align-middle">
         {session ? (
           <div>
