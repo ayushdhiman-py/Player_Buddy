@@ -30,7 +30,6 @@ export default function Index() {
           return postDate >= currentDate;
         });
       setPosts(postsData);
-      setFilteredPosts(postsData); // Initially show all posts
       setLoading(false); // Set loading to false once posts are fetched
     } catch (error) {
       console.error("Error fetching posts:", error);
