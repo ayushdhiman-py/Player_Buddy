@@ -59,7 +59,7 @@ function Form() {
             {
               inputs && router.push("/");
             }
-          }, 5000)
+          }, 3000)
         );
     } catch (error) {
       console.error("Error uploading file:", error.message());
@@ -71,9 +71,7 @@ function Form() {
     await setDoc(doc(db, "posts", Date.now().toString()), inputs);
   };
 
-  const handleGameClick = (gameName) => {
-    setSelectedGame(gameName);
-  };
+
   return (
     <div className="mt-4">
       {showToast ? (
