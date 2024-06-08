@@ -62,7 +62,7 @@ export default function Index() {
     } else if (lowercaseGameName === "other games") {
       // Show posts that do not match any category
       const filtered = posts.filter((post) => {
-        const lowercaseTitle = post.title.toLowerCase(); // Convert post title to lowercase
+        const lowercaseTitle = post.game.toLowerCase(); // Convert post title to lowercase
         return !Data.GameList.some(
           (game) => game.name.toLowerCase() === lowercaseTitle
         ); // Check if post title matches any game name
