@@ -45,7 +45,8 @@ export default function Index() {
           post.title.toLowerCase().includes(lowercaseSearchText) ||
           post.location.toLowerCase().includes(lowercaseSearchText) ||
           (post.zip && post.zip.includes(searchText)) ||
-          post.desc.toLowerCase().includes(lowercaseSearchText)
+          post.desc.toLowerCase().includes(lowercaseSearchText) ||
+          post.game.toLowerCase().includes(lowercaseSearchText)
         );
       });
       setFilteredPosts(filtered);
