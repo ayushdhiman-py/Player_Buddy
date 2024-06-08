@@ -30,6 +30,7 @@ export default function Index() {
           return postDate >= currentDate;
         });
       setPosts(postsData);
+      setFilteredPosts(postsData); // Initially show all posts
       setLoading(false); // Set loading to false once posts are fetched
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -61,17 +62,17 @@ export default function Index() {
     } else if (lowercaseGameName === "other games") {
       // Show posts that do not match any category
       const filtered = posts.filter((post) => {
-        const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
+        const lowercaseTitle = post.title.toLowerCase(); // Convert post title to lowercase
         return !Data.GameList.some(
-          (game) => game.name.toLowerCase() === lowercaseGame
-        ); // Check if post game matches any game name
+          (game) => game.name.toLowerCase() === lowercaseTitle
+        ); // Check if post title matches any game name
       });
       setFilteredPosts(filtered);
     } else {
       // Show posts that match the selected game
       const filtered = posts.filter((post) => {
-        const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
-        return lowercaseGame === lowercaseGameName; // Check if post game matches the selected game name
+        const lowercaseTitle = post.title.toLowerCase(); // Convert post title to lowercase
+        return lowercaseTitle.includes(lowercaseGameName); // Check if post title contains the selected game name
       });
       setFilteredPosts(filtered);
     }
