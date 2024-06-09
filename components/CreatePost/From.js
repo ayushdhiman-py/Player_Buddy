@@ -71,7 +71,6 @@ function Form() {
     await setDoc(doc(db, "posts", Date.now().toString()), inputs);
   };
 
-
   return (
     <div className="mt-4">
       {showToast ? (
@@ -126,13 +125,15 @@ function Form() {
         />
         <select
           name="game"
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            setSelectedGame(e.target.value); // Update selected game state
+          }}
           required
           className="w-full mb-4 border-[1px] p-2 rounded-md text-black"
-          defaultValue="ALL" // Set default value to "ALL"
         >
-          <option value="ALL">Select Game</option> {/* Placeholder option */}
-          {Data.GameList.map((item) => (
+          <option value="">Select Game</option> {/* Placeholder option */}
+          {Data.GameList.filter(item => item.name !== "ALL").map((item) => (
             <option key={item.id} value={item.name}>
               {item.name}
             </option>
