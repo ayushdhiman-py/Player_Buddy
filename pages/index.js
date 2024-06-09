@@ -61,12 +61,9 @@ export default function Index() {
     if (lowercaseGameName === "all") {
       setFilteredPosts(posts); // If "ALL" is clicked, show all posts
     } else if (lowercaseGameName === "other games") {
-      // Show posts that do not match any category
       const filtered = posts.filter((post) => {
         const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
-        return !Data.GameList.some(
-          (game) => game.name.toLowerCase() === lowercaseGame
-        ); // Check if post game matches any game name
+        return lowercaseGame === lowercaseGameName; // Check if post game matches the selected game name
       });
       setFilteredPosts(filtered);
     } else {
