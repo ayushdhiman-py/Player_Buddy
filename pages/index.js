@@ -58,23 +58,26 @@ export default function Index() {
   const handleGameClick = (gameName) => {
     setSelectedGame(gameName);
     const lowercaseGameName = gameName.toLowerCase(); // Convert game name to lowercase for case-insensitive comparison
+
     if (lowercaseGameName === "all") {
-      setFilteredPosts(posts); // If "ALL" is clicked, show all posts
+        setFilteredPosts(posts); // If "ALL" is clicked, show all posts
     } else if (lowercaseGameName === "other games") {
-      const filtered = posts.filter((post) => {
-        const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
-        return lowercaseGame === lowercaseGameName; // Check if post game matches the selected game name
-      });
-      setFilteredPosts(filtered);
+        // Filter posts for games that are not in the main list (excluding "Other Games" category)
+        const mainGames = ["cricket", "tennis", "ping pong", "football", "badminton", "trekking"];
+        const filtered = posts.filter((post) => {
+            const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
+            return !mainGames.includes(lowercaseGame); // Exclude main games
+        });
+        setFilteredPosts(filtered);
     } else {
-      // Show posts that match the selected game
-      const filtered = posts.filter((post) => {
-        const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
-        return lowercaseGame === lowercaseGameName; // Check if post game matches the selected game name
-      });
-      setFilteredPosts(filtered);
+        // Show posts that match the selected game
+        const filtered = posts.filter((post) => {
+            const lowercaseGame = post.game.toLowerCase(); // Convert post game to lowercase
+            return lowercaseGame === lowercaseGameName; // Check if post game matches the selected game name
+        });
+        setFilteredPosts(filtered);
     }
-  };
+};
 
   return (
     <div className="px-5 sm:px-7 mg:px-10 mt-9">
