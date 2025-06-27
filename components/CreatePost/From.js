@@ -42,34 +42,30 @@ function Form() {
     e.preventDefault();
     try {
       const storageRef = ref(storage, "findplayer/" + file?.name);
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
 
-      await uploadBytes(storageRef, file)
-        .then((snapshot) => {
-          console.log("Uploaded a blob or file!");
-        })
-        .then((resp) => {
-          getDownloadURL(storageRef).then(async (url) => {
-            setInputs((values) => ({ ...values, image: url }));
-            setSubmit(true);
-          });
-        })
-        .then(setShowToast(true))
-        .then(
-          setTimeout(() => {
-            {
-              inputs && router.push("/");
-            }
-          }, 3000)
-        );
+      const finalInputs = {
+        ...inputs,
+        image: url,
+      };
+
+      await savePost(finalInputs); // Pass full input to savePost
+      setShowToast(true);
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
     } catch (error) {
-      console.error("Error uploading file:", error.message());
-      alert("error is caught here!");
+      console.error("Error uploading file:", error);
+      alert("Upload error!");
     }
   };
 
-  const savePost = async () => {
-    await setDoc(doc(db, "posts", Date.now().toString()), inputs);
+
+  const savePost = async (postData) => {
+    await setDoc(doc(db, "posts", Date.now().toString()), postData);
   };
+
 
   return (
     <div className="mt-4">
